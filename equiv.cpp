@@ -1,3 +1,8 @@
+// CSCI 2530
+// Assignment: 3
+// Author:     Nigel Smith
+// File:       equiv.cpp
+// Tab stops:  4
 #include <iostream>
 #include <cstdio>
 #include <cstdlib>
@@ -6,11 +11,12 @@
 
 using namespace std;
 
+//converts int to strings for printing
 string integerTostring(int n)
 {
 	string ans = "";
 	while (n != 0)
-	{
+    {
 		int rem = n % 10;
 		ans = (char)('0' + rem) + ans;
 		n = n / 10;
@@ -18,6 +24,12 @@ string integerTostring(int n)
 	return ans;
 }
 
+/****************************************************
+*                      newER                       *
+****************************************************
+* Initialzes the the array of Ints ER that will be *
+* used in the rest of the program and returns e.   *
+****************************************************/
 int * newER(int n)
 {
 	int * e = (int*)malloc((n + 1) * sizeof(int));
@@ -29,6 +41,12 @@ int * newER(int n)
 	return e;
 }
 
+/****************************************************
+*                      leader                      *
+****************************************************
+* Identifies the Leader of x in R                  *
+* returns the x index of R                         *
+****************************************************/
 int leader(int * R, int x)
 {
 	if (R[x] != x)
@@ -37,11 +55,29 @@ int leader(int * R, int x)
 	return R[x];
 }
 
+/****************************************************
+*                    equivalent                    *
+****************************************************
+* Returns true or false in relation to if x and y  *
+* are equivalent.                                  *
+****************************************************/
 bool equivalent(int * R, int x, int y)
 {
-	return leader(R, x) == leader(R, y);
+	if (leader(R, x) == leader(R, y)) 
+	{
+		return true;
+	}
+	else
+	{
+		return false;
+	}
 }
 
+/****************************************************
+*                      merge                       *
+****************************************************
+* returns the combination of x and y               *
+****************************************************/
 void merge(int * R, int x, int y)
 {
 	int xl = leader(R, x);
@@ -53,11 +89,21 @@ void merge(int * R, int x, int y)
 	}
 }
 
+/****************************************************
+*                  destroyER                       *
+****************************************************
+* destroys ER from memory                          *
+****************************************************/
 void destroyER(int * R)
 {
 	free(R);
 }
 
+/****************************************************
+*                      showER                      *
+****************************************************
+* prints R                                         *
+****************************************************/
 void showER(int * R, int n)
 {
 	int parent = 1;
